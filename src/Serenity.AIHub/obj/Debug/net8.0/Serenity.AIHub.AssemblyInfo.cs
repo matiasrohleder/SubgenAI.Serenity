@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Core functionality for Serenity AIHub SDK")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1da29f6a5c8687e074e70ba32474889b042d900b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c24cbd1342f52a882a8591b9a0dfdf4cb147e5ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("Serenity.AIHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Serenity.AIHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
