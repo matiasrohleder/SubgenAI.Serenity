@@ -1,17 +1,18 @@
-using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using Serenity.AIHub.Abstractions;
+using Serenity.AIHub.Models;
 
 namespace Serenity.AIHub.Client;
 
+/// <inheritdoc />
 public class SerenityAIHubClient : ISerenityAIHubClient
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SerenityAIHubClient"/> class.
+    /// </summary>
+    /// <param name="apiKey">The API key to use for authentication.</param>
+    /// <param name="httpClient">The HTTP client to use for making requests.</param>
     public SerenityAIHubClient(string apiKey, HttpClient httpClient)
     {
         _apiKey = apiKey ?? throw new ArgumentNullException(nameof(apiKey));
@@ -20,12 +21,9 @@ public class SerenityAIHubClient : ISerenityAIHubClient
         _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
     }
 
-    public async Task<T> GetAsync<T>(string endpoint, CancellationToken cancellationToken = default)
+    /// <inheritdoc />
+    public Task<CreateConversationRes> CreateConversation(string agentCode, int? version, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.GetAsync(endpoint, cancellationToken);
-        response.EnsureSuccessStatusCode();
-
-        var content = await response.Content.ReadAsStringAsync(cancellationToken);
-        return JsonSerializer.Deserialize<T>(content)!;
+        throw new NotImplementedException();
     }
 }

@@ -3,11 +3,11 @@
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Authors>Your Name</Authors>
-    <Company>Your Company</Company>
+    <Authors>Matías Rohleder</Authors>
+    <Company>Subgen AI</Company>
     <Copyright>Copyright © 2024</Copyright>
-    <PackageProjectUrl>https://github.com/yourusername/Serenity.AIHub</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/yourusername/Serenity.AIHub</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/matiasrohleder/Serenity.AIHub</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matiasrohleder/Serenity.AIHub</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>

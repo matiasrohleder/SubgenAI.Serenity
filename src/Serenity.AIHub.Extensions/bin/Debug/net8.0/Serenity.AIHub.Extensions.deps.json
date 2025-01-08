@@ -173,19 +173,10 @@
       "Serenity.AIHub/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Http": "8.0.0",
-          "Microsoft.Extensions.Options": "8.0.0",
-          "Serenity.AIHub.Abstractions": "1.0.0"
+          "Microsoft.Extensions.Options": "8.0.0"
         },
         "runtime": {
           "Serenity.AIHub.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Serenity.AIHub.Abstractions/1.0.0": {
-        "runtime": {
-          "Serenity.AIHub.Abstractions.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -298,11 +289,6 @@
       "hashPath": "system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512"
     },
     "Serenity.AIHub/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Serenity.AIHub.Abstractions/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

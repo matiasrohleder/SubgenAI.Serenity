@@ -4,6 +4,7 @@
     <PackageId>Serenity.AIHub.Extensions</PackageId>
     <Description>Extensions for Serenity AIHub SDK</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>

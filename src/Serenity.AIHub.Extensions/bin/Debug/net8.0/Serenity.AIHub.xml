@@ -4,5 +4,82 @@
         <name>Serenity.AIHub</name>
     </assembly>
     <members>
+        <member name="T:Serenity.AIHub.Client.ISerenityAIHubClient">
+            <summary>
+            Represents the interface for interacting with the Serenity AI Hub.
+            </summary>
+        </member>
+        <member name="M:Serenity.AIHub.Client.ISerenityAIHubClient.CreateConversation(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Creates a conversation with the specified agent code and version.
+            </summary>
+            <param name="agentCode">The agent code to use for the conversation.</param>
+            <param name="version">The version of the agent.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains the created conversation response.</returns>
+        </member>
+        <member name="T:Serenity.AIHub.Client.SerenityAIHubClient">
+            <inheritdoc />
+        </member>
+        <member name="M:Serenity.AIHub.Client.SerenityAIHubClient.#ctor(System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Serenity.AIHub.Client.SerenityAIHubClient"/> class.
+            </summary>
+            <param name="apiKey">The API key to use for authentication.</param>
+            <param name="httpClient">The HTTP client to use for making requests.</param>
+        </member>
+        <member name="M:Serenity.AIHub.Client.SerenityAIHubClient.CreateConversation(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Serenity.AIHub.Models.CreateConversationRes">
+            <summary>
+            Represents the response for creating a conversation.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.CreateConversationRes.ChatId">
+            <summary>
+            Unique identifier for the chat.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.CreateConversationRes.Content">
+            <summary>
+            Content of the conversation.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.CreateConversationRes.ConversationStarters">
+            <summary>
+            List of conversation starters.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.CreateConversationRes.Version">
+            <summary>
+            Version of the agent
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.CreateConversationRes.UseVision">
+            <summary>
+            Value indicating whether vision is used.
+            </summary>
+        </member>
+        <member name="T:Serenity.AIHub.Models.SerenityAIHubOptions">
+            <summary>
+            Options for the Serenity AI Hub.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.SerenityAIHubOptions.ApiKey">
+            <summary>
+            Gets or sets the API key.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.SerenityAIHubOptions.BaseUrl">
+            <summary>
+            Gets or sets the base URL.
+            </summary>
+        </member>
+        <member name="P:Serenity.AIHub.Models.SerenityAIHubOptions.TimeoutSeconds">
+            <summary>
+            Gets or sets the timeout in seconds.
+            </summary>
+        </member>
     </members>
 </doc>

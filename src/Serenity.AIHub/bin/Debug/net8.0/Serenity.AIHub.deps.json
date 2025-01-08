@@ -9,8 +9,7 @@
       "Serenity.AIHub/1.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Http": "8.0.0",
-          "Microsoft.Extensions.Options": "8.0.0",
-          "Serenity.AIHub.Abstractions": "1.0.0"
+          "Microsoft.Extensions.Options": "8.0.0"
         },
         "runtime": {
           "Serenity.AIHub.dll": {}
@@ -170,15 +169,7 @@
           }
         }
       },
-      "System.Diagnostics.DiagnosticSource/8.0.0": {},
-      "Serenity.AIHub.Abstractions/1.0.0": {
-        "runtime": {
-          "Serenity.AIHub.Abstractions.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      }
+      "System.Diagnostics.DiagnosticSource/8.0.0": {}
     }
   },
   "libraries": {
@@ -284,11 +275,6 @@
       "sha512": "sha512-c9xLpVz6PL9lp/djOWtk5KPDZq3cSYpmXoJQY524EOtuFl5z9ZtsotpsyrDW40U1DRnQSYvcPKEUV0X//u6gkQ==",
       "path": "system.diagnostics.diagnosticsource/8.0.0",
       "hashPath": "system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512"
-    },
-    "Serenity.AIHub.Abstractions/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

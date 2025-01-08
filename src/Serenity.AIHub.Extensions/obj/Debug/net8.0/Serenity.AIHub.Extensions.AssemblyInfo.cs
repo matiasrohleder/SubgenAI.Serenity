@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Extensions for Serenity AIHub SDK")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1da29f6a5c8687e074e70ba32474889b042d900b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Serenity.AIHub.Extensions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Serenity.AIHub.Extensions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
