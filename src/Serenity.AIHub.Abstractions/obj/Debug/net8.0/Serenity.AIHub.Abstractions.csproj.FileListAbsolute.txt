@@ -1,0 +1,13 @@
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\bin\Debug\net8.0\Serenity.AIHub.Abstractions.deps.json
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\bin\Debug\net8.0\Serenity.AIHub.Abstractions.dll
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\bin\Debug\net8.0\Serenity.AIHub.Abstractions.pdb
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\bin\Debug\net8.0\Serenity.AIHub.Abstractions.xml
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.AssemblyInfoInputs.cache
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.AssemblyInfo.cs
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.csproj.CoreCompileInputs.cache
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.dll
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\refint\Serenity.AIHub.Abstractions.dll
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.xml
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\Serenity.AIHub.Abstractions.pdb
+C:\Users\mrohleder\Downloads\Codes\Serenity.AIHub\src\Serenity.AIHub.Abstractions\obj\Debug\net8.0\ref\Serenity.AIHub.Abstractions.dll

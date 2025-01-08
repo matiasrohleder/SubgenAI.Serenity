@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Serenity.AIHub.Abstractions/1.0.0": {
+        "runtime": {
+          "Serenity.AIHub.Abstractions.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Serenity.AIHub.Abstractions/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
