@@ -6,3 +6,4 @@ A.NET SDK for interacting with the Serenity AI Hub API.
 
 ```bash
 dotnet add package Serenity.AIHub
+```
