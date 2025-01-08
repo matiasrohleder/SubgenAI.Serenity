@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Serenity.AIHub.Client;
 using Serenity.AIHub.Models;
 
@@ -23,7 +24,7 @@ public static class ServiceCollectionExtensions
 
         services.AddHttpClient<ISerenityAIHubClient, SerenityAIHubClient>((serviceProvider, client) =>
         {
-            var options = serviceProvider.GetRequiredService<SerenityAIHubOptions>();
+            var options = serviceProvider.GetRequiredService<IOptions<SerenityAIHubOptions>>().Value;
             client.BaseAddress = new Uri(options.BaseUrl);
             client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
         });
