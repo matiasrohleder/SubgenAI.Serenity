@@ -24,6 +24,6 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     /// <inheritdoc />
     public Task<CreateConversationRes> CreateConversation(string agentCode, int? version, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Not implemented yet.");
     }
 }
