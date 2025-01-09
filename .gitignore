@@ -43,6 +43,7 @@ BuildTimeStamp.txt
 .config/dotnet-tools.json
 
 # Nuget packages
+nupkg/
 *.nupkg
 
 # Launch settings
