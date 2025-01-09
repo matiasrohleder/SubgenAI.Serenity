@@ -1,4 +1,5 @@
 using Serenity.AIHub.Models;
+using Serenity.AIHub.Models.Execute;
 
 namespace Serenity.AIHub.Client;
 
@@ -24,5 +25,5 @@ public interface ISerenityAIHubClient
     /// <param name="message">The message to send.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The response from the agent.</returns>
-    Task<SendMessageRes> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default);
+    Task<AgentResult> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default);
 }

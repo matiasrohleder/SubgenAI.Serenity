@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Serenity.AIHub.Client;
+using Serenity.AIHub.Models;
+using Serenity.AIHub.Models.Execute;
 using Xunit;
 
 namespace Serenity.AIHub.IntegrationTests;
@@ -51,19 +53,27 @@ public class ConversationIntegrationTests : IClassFixture<TestFixture>
     public async Task CreateConversationAndSendMessage_ShouldSucceed()
     {
         // Arrange - Create a conversation first
-        var conversation = await _client.CreateConversation("assistantagent", null);
+        CreateConversationRes conversation = await _client.CreateConversation("assistantagent", null);
         Assert.NotEqual(Guid.Empty, conversation.ChatId);
 
         // Act - Send a message to the conversation
-        var messageResponse = await _client.SendMessage(
+        AgentResult agentResult = await _client.SendMessage(
             "assistantagent",
             conversation.ChatId,
             "Hello, how are you?");
 
         // Assert
-        Assert.NotNull(messageResponse);
-        Assert.NotNull(messageResponse.Content);
-        Assert.NotEmpty(messageResponse.Content);
+        Assert.NotNull(agentResult);
+        Assert.NotNull(agentResult.Content);
+        Assert.NotEmpty(agentResult.Content);
+        Assert.NotEqual(Guid.Empty, agentResult.InstanceId);
+
+        // Optional properties might be null depending on the response
+        if (agentResult.ActionResults != null)
+            Assert.IsType<Dictionary<string, object>>(agentResult.ActionResults);
+
+        if (agentResult.ExecutorTaskLogs != null)
+            Assert.IsType<List<ExecutorTaskResult>>(agentResult.ExecutorTaskLogs);
     }
 
     [Fact]

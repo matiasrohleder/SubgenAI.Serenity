@@ -1,7 +1,10 @@
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
 using Serenity.AIHub.Constants;
 using Serenity.AIHub.Models;
+using Serenity.AIHub.Models.Execute;
 
 namespace Serenity.AIHub.Client;
 
@@ -9,6 +12,11 @@ namespace Serenity.AIHub.Client;
 public class SerenityAIHubClient : ISerenityAIHubClient
 {
     private readonly HttpClient _httpClient;
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    };
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SerenityAIHubClient"/> class for dependency injection.
@@ -65,12 +73,12 @@ public class SerenityAIHubClient : ISerenityAIHubClient
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<CreateConversationRes>(cancellationToken: cancellationToken)
+        return await response.Content.ReadFromJsonAsync<CreateConversationRes>(JsonOptions, cancellationToken)
                ?? throw new InvalidOperationException("Failed to deserialize response");
     }
 
     /// <inheritdoc />
-    public async Task<SendMessageRes> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default)
+    public async Task<AgentResult> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
@@ -81,18 +89,19 @@ public class SerenityAIHubClient : ISerenityAIHubClient
 
         var parameters = new[]
         {
-            new MessageParameter { Key = "chatId", Value = chatId.ToString() },
-            new MessageParameter { Key = "message", Value = message }
+            new ExecuteParameter { Key = "chatId", Value = chatId.ToString() },
+            new ExecuteParameter { Key = "message", Value = message }
         };
 
         var response = await _httpClient.PostAsJsonAsync(
             $"/api/v2/agent/{agentCode}/execute",
             parameters,
+            JsonOptions,
             cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<SendMessageRes>(cancellationToken: cancellationToken)
+        return await response.Content.ReadFromJsonAsync<AgentResult>(JsonOptions, cancellationToken)
                ?? throw new InvalidOperationException("Failed to deserialize response");
     }
 }
