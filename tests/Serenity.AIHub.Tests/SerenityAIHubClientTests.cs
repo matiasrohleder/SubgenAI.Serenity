@@ -18,8 +18,9 @@ public class SerenityAIHubClientTests
         {
             // Verify request
             Assert.Equal(HttpMethod.Post, request.Method);
-            Assert.Equal("/v1/conversations/test-agent?version=1", request.RequestUri?.PathAndQuery);
-            Assert.Equal("Bearer test-key", request.Headers.Authorization?.ToString());
+            Assert.Equal("/api/v2/agent/assistantagent/conversation?version=1", request.RequestUri?.PathAndQuery);
+            Assert.Equal("b87020eb-f3d0-4ef4-96ce-5ca60ca5e652", request.Headers.GetValues("X-API-KEY").FirstOrDefault());
+            Assert.Equal("application/json", request.Headers.GetValues("Content-Type").FirstOrDefault());
 
             // Return mock response
             var response = new CreateConversationRes
@@ -40,8 +41,8 @@ public class SerenityAIHubClientTests
         var services = new ServiceCollection();
         services.AddSerenityAIHub(options =>
         {
-            options.ApiKey = "test-key";
-            options.BaseUrl = "https://api.serenityaihub.com";
+            options.ApiKey = "b87020eb-f3d0-4ef4-96ce-5ca60ca5e652";
+            options.BaseUrl = "https://test-api-aihub.binit.dev";
         });
 
         // Replace the HttpClient with our test handler
@@ -52,7 +53,7 @@ public class SerenityAIHubClientTests
         var client = serviceProvider.GetRequiredService<ISerenityAIHubClient>();
 
         // Act
-        var result = await client.CreateConversation("test-agent", 1);
+        var result = await client.CreateConversation("assistantagent", 1);
 
         // Assert
         Assert.NotEqual(Guid.Empty, result.ChatId);
@@ -70,8 +71,9 @@ public class SerenityAIHubClientTests
         {
             // Verify request
             Assert.Equal(HttpMethod.Post, request.Method);
-            Assert.Equal("/v1/conversations/test-agent", request.RequestUri?.PathAndQuery);
-            Assert.Equal("Bearer test-key", request.Headers.Authorization?.ToString());
+            Assert.Equal("/api/v2/agent/assistantagent/conversation", request.RequestUri?.PathAndQuery);
+            Assert.Equal("b87020eb-f3d0-4ef4-96ce-5ca60ca5e652", request.Headers.GetValues("X-API-KEY").FirstOrDefault());
+            Assert.Equal("application/json", request.Headers.GetValues("Content-Type").FirstOrDefault());
 
             var response = new CreateConversationRes
             {
@@ -91,8 +93,8 @@ public class SerenityAIHubClientTests
         var services = new ServiceCollection();
         services.AddSerenityAIHub(options =>
         {
-            options.ApiKey = "test-key";
-            options.BaseUrl = "https://api.serenityaihub.com";
+            options.ApiKey = "b87020eb-f3d0-4ef4-96ce-5ca60ca5e652";
+            options.BaseUrl = "https://test-api-aihub.binit.dev";
         });
 
         services.AddHttpClient<ISerenityAIHubClient, SerenityAIHubClient>()
@@ -102,26 +104,9 @@ public class SerenityAIHubClientTests
         var client = serviceProvider.GetRequiredService<ISerenityAIHubClient>();
 
         // Act
-        var result = await client.CreateConversation("test-agent", null);
+        var result = await client.CreateConversation("assistantagent", null);
 
         // Assert
         Assert.NotEqual(Guid.Empty, result.ChatId);
-    }
-
-    private class TestHttpMessageHandler : HttpMessageHandler
-    {
-        private readonly Func<HttpRequestMessage, Task<HttpResponseMessage>> _handler;
-
-        public TestHttpMessageHandler(Func<HttpRequestMessage, Task<HttpResponseMessage>> handler)
-        {
-            _handler = handler;
-        }
-
-        protected override async Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
-            return await _handler(request);
-        }
     }
 }

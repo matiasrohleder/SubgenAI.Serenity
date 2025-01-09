@@ -21,7 +21,7 @@ public class SerenityAIHubClient : ISerenityAIHubClient
         _apiKey = options.Value.ApiKey ?? throw new ArgumentNullException(nameof(options.Value.ApiKey));
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
+        _httpClient.DefaultRequestHeaders.Add("X-API-KEY", _apiKey);
     }
 
     /// <inheritdoc />
@@ -31,7 +31,11 @@ public class SerenityAIHubClient : ISerenityAIHubClient
             throw new ArgumentNullException(nameof(agentCode));
 
         var queryString = version.HasValue ? $"?version={version}" : string.Empty;
-        var response = await _httpClient.PostAsync($"/v1/conversations/{agentCode}{queryString}", null, cancellationToken);
+
+        // Create an empty content with the correct Content-Type header
+        var content = new StringContent("{}", System.Text.Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync($"/api/v2/agent/{agentCode}/conversation{queryString}", content, cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
