@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
-using Serenity.AIHub.Client;
-using Serenity.AIHub.Models;
-using Serenity.AIHub.Models.Execute;
+using SubgenAI.Serenity.Client;
+using SubgenAI.Serenity.Models;
+using SubgenAI.Serenity.Models.Execute;
 using Xunit;
 
-namespace Serenity.AIHub.IntegrationTests;
+namespace SubgenAI.Serenity.IntegrationTests;
 
 public class ConversationIntegrationTests : IClassFixture<TestFixture>
 {

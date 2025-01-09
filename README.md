@@ -5,7 +5,7 @@ Official .NET SDK for Serenity AIHub API.
 ## Installation
 
 ```bash
-dotnet add package Serenity.AIHub
+dotnet add package SubgenAI.Serenity
 ```
 
 ## Usage

@@ -1,8 +1,9 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Microsoft.Extensions.DependencyInjection;
-using Serenity.AIHub.Extensions;
+using SubgenAI.Serenity.Extensions;
 
-namespace Serenity.AIHub.IntegrationTests;
+namespace SubgenAI.Serenity.IntegrationTests;
 
 public class TestFixture : IDisposable
 {

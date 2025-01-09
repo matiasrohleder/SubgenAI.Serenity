@@ -1,4 +1,4 @@
-namespace Serenity.AIHub.Models;
+namespace SubgenAI.Serenity.Models;
 
 /// <summary>
 /// Represents the response for creating a conversation.

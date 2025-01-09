@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -15,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serenity.AIHub\Serenity.AIHub.csproj" />
-    <ProjectReference Include="..\..\src\Serenity.AIHub.Extensions\Serenity.AIHub.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\SubgenAI.Serenity\SubgenAI.Serenity.csproj" />
+    <ProjectReference Include="..\..\src\SubgenAI.Serenity.Extensions\SubgenAI.Serenity.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

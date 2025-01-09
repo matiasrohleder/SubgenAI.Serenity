@@ -1,4 +1,4 @@
-namespace Serenity.AIHub.Models.Execute;
+namespace SubgenAI.Serenity.Models.Execute;
 
 /// <summary>
 /// Represents a parameter for the execute endpoint.

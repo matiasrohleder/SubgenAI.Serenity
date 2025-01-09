@@ -1,7 +1,7 @@
-using Serenity.AIHub.Models;
-using Serenity.AIHub.Models.Execute;
+using SubgenAI.Serenity.Models;
+using SubgenAI.Serenity.Models.Execute;
 
-namespace Serenity.AIHub.Client;
+namespace SubgenAI.Serenity.Client;
 
 /// <summary>
 /// Represents the interface for interacting with the Serenity AI Hub.
