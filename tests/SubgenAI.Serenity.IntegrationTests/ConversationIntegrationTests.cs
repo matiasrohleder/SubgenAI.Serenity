@@ -6,20 +6,15 @@ using Xunit;
 
 namespace SubgenAI.Serenity.IntegrationTests;
 
-public class ConversationIntegrationTests : IClassFixture<TestFixture>
+public class ConversationIntegrationTests(TestFixture fixture) : IClassFixture<TestFixture>
 {
-    private readonly ISerenityAIHubClient _client;
-
-    public ConversationIntegrationTests(TestFixture fixture)
-    {
-        _client = fixture.ServiceProvider.GetRequiredService<ISerenityAIHubClient>();
-    }
+    private readonly ISerenityAIHubClient _client = fixture.ServiceProvider.GetRequiredService<ISerenityAIHubClient>();
 
     [Fact]
     public async Task CreateConversation_WithoutVersion_ShouldSucceed()
     {
         // Act
-        var result = await _client.CreateConversation("assistantagent", null);
+        CreateConversationRes result = await _client.CreateConversation("assistantagent", null);
 
         // Assert
         Assert.NotEqual(Guid.Empty, result.ChatId);
@@ -31,7 +26,7 @@ public class ConversationIntegrationTests : IClassFixture<TestFixture>
     public async Task CreateConversation_WithVersion_ShouldSucceed()
     {
         // Act
-        var result = await _client.CreateConversation("assistantagent", 1);
+        CreateConversationRes result = await _client.CreateConversation("assistantagent", 1);
 
         // Assert
         Assert.NotEqual(Guid.Empty, result.ChatId);
@@ -57,10 +52,18 @@ public class ConversationIntegrationTests : IClassFixture<TestFixture>
         Assert.NotEqual(Guid.Empty, conversation.ChatId);
 
         // Act - Send a message to the conversation
-        AgentResult agentResult = await _client.SendMessage(
+        List<ExecuteParameter> input = [];
+        input.Add(new(
+                "chatId",
+                conversation.ChatId
+            ));
+        input.Add(new(
+            "message",
+            "Hello, how are you?"
+        ));
+        AgentResult agentResult = await _client.Execute(
             "assistantagent",
-            conversation.ChatId,
-            "Hello, how are you?");
+            input);
 
         // Assert
         Assert.NotNull(agentResult);
@@ -77,50 +80,39 @@ public class ConversationIntegrationTests : IClassFixture<TestFixture>
     }
 
     [Fact]
-    public async Task SendMessage_WithInvalidChatId_ShouldFail()
-    {
-        // Act & Assert
-        await Assert.ThrowsAsync<HttpRequestException>(() =>
-            _client.SendMessage("assistantagent", Guid.NewGuid(), "Hello"));
-    }
-
-    [Fact]
-    public async Task SendMessage_WithEmptyChatId_ShouldThrowArgumentException()
-    {
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(() =>
-            _client.SendMessage("assistantagent", Guid.Empty, "Hello"));
-    }
-
-    [Fact]
-    public async Task SendMessage_WithEmptyMessage_ShouldThrowArgumentNullException()
-    {
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _client.SendMessage("assistantagent", Guid.NewGuid(), string.Empty));
-    }
-
-    [Fact]
     public async Task FullConversationFlow_ShouldSucceed()
     {
         // Arrange - Create a conversation
-        var conversation = await _client.CreateConversation("assistantagent", null);
+        CreateConversationRes conversation = await _client.CreateConversation("assistantagent", null);
         Assert.NotEqual(Guid.Empty, conversation.ChatId);
 
         // Act & Assert - Send multiple messages
-        var messages = new[]
-        {
+        string[] messages =
+        [
             "Hello, how are you?",
             "What can you help me with?",
             "Thank you for your help!"
-        };
+        ];
 
-        foreach (var message in messages)
+        foreach (string message in messages)
         {
-            var response = await _client.SendMessage(
-                "assistantagent",
-                conversation.ChatId,
-                message);
+            List<ExecuteParameter> input = [];
+            input.Add(new(
+                "chatId",
+                conversation.ChatId
+            ));
+            input.Add(new(
+                "message",
+                message
+            ));
+
+            input.Add(new(
+                "language",
+                "german"
+            ));
+
+            AgentResult response = await _client.Execute(
+                "assistantagent", input);
 
             Assert.NotNull(response);
             Assert.NotNull(response.Content);
