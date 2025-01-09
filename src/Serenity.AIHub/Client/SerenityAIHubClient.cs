@@ -42,4 +42,31 @@ public class SerenityAIHubClient : ISerenityAIHubClient
         return await response.Content.ReadFromJsonAsync<CreateConversationRes>(cancellationToken: cancellationToken)
                ?? throw new InvalidOperationException("Failed to deserialize response");
     }
+
+    /// <inheritdoc />
+    public async Task<SendMessageRes> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrEmpty(agentCode))
+            throw new ArgumentNullException(nameof(agentCode));
+        if (chatId == Guid.Empty)
+            throw new ArgumentException("Chat ID cannot be empty", nameof(chatId));
+        if (string.IsNullOrEmpty(message))
+            throw new ArgumentNullException(nameof(message));
+
+        var parameters = new[]
+        {
+            new MessageParameter { Key = "chatId", Value = chatId.ToString() },
+            new MessageParameter { Key = "message", Value = message }
+        };
+
+        var response = await _httpClient.PostAsJsonAsync(
+            $"/api/v2/agent/{agentCode}/execute",
+            parameters,
+            cancellationToken);
+
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<SendMessageRes>(cancellationToken: cancellationToken)
+               ?? throw new InvalidOperationException("Failed to deserialize response");
+    }
 }
