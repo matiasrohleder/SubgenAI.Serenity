@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Serenity.AIHub.Client;
+using Serenity.AIHub.Constants;
 using Serenity.AIHub.Models;
 
 namespace Serenity.AIHub.Extensions;
@@ -14,19 +14,24 @@ public static class ServiceCollectionExtensions
     /// Adds the Serenity AI Hub services to the specified IServiceCollection.
     /// </summary>
     /// <param name="services">The IServiceCollection to add the services to.</param>
-    /// <param name="configureOptions">An action that configures the Serenity AI Hub options.</param>
+    /// <param name="apiKey">The API key to use for authentication.</param>
+    /// <param name="timeoutSeconds">Optional timeout in seconds. Defaults to 30 seconds.</param>
     /// <returns>The IServiceCollection with the Serenity AI Hub services added.</returns>
     public static IServiceCollection AddSerenityAIHub(
         this IServiceCollection services,
-        Action<SerenityAIHubOptions> configureOptions)
+        string apiKey,
+        int timeoutSeconds = 30)
     {
-        services.Configure(configureOptions);
-
-        services.AddHttpClient<ISerenityAIHubClient, SerenityAIHubClient>((serviceProvider, client) =>
+        services.Configure<SerenityAIHubOptions>(options =>
         {
-            var options = serviceProvider.GetRequiredService<IOptions<SerenityAIHubOptions>>().Value;
-            client.BaseAddress = new Uri(options.BaseUrl);
-            client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
+            options.ApiKey = apiKey;
+            options.TimeoutSeconds = timeoutSeconds;
+        });
+
+        services.AddHttpClient<ISerenityAIHubClient, SerenityAIHubClient>((_, client) =>
+        {
+            client.BaseAddress = new Uri(ClientConstants.BaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
         });
 
         return services;

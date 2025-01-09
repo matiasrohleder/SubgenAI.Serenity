@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serenity.AIHub.Client;
 using Serenity.AIHub.Extensions;
 
 namespace Serenity.AIHub.IntegrationTests;
@@ -21,11 +20,10 @@ public class TestFixture : IDisposable
 
         var services = new ServiceCollection();
 
-        services.AddSerenityAIHub(options =>
-        {
-            options.ApiKey = Configuration["SerenityAIHub:ApiKey"]!;
-            options.BaseUrl = Configuration["SerenityAIHub:BaseUrl"]!;
-        });
+        var apiKey = Configuration["SerenityAIHub:ApiKey"]
+            ?? throw new InvalidOperationException("API key not found in configuration");
+
+        services.AddSerenityAIHub(apiKey);
 
         ServiceProvider = services.BuildServiceProvider();
     }
