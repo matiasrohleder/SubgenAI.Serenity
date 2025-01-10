@@ -2,11 +2,11 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
-using Serenity.AIHub.Constants;
-using Serenity.AIHub.Models;
-using Serenity.AIHub.Models.Execute;
+using SubgenAI.Serenity.Constants;
+using SubgenAI.Serenity.Models;
+using SubgenAI.Serenity.Models.Execute;
 
-namespace Serenity.AIHub.Client;
+namespace SubgenAI.Serenity.Client;
 
 /// <inheritdoc />
 public class SerenityAIHubClient : ISerenityAIHubClient
@@ -25,8 +25,8 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     /// <param name="httpClient">The HTTP client to use for making requests.</param>
     public SerenityAIHubClient(IOptions<SerenityAIHubOptions> options, HttpClient httpClient)
     {
-        if (options == null) throw new ArgumentNullException(nameof(options));
-        var apiKey = options.Value.ApiKey ?? throw new ArgumentNullException(nameof(options.Value.ApiKey));
+        ArgumentNullException.ThrowIfNull(options);
+        string apiKey = options.Value.ApiKey ?? throw new ArgumentNullException(nameof(options), "The ApiKey property of the options. Value object is null.");
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
         ConfigureHttpClient(_httpClient, apiKey);
@@ -38,9 +38,10 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     /// <param name="apiKey">The API key to use for authentication.</param>
     public static SerenityAIHubClient Create(string apiKey)
     {
-        if (string.IsNullOrEmpty(apiKey)) throw new ArgumentNullException(nameof(apiKey));
+        if (string.IsNullOrEmpty(apiKey))
+            throw new ArgumentNullException(nameof(apiKey));
 
-        var httpClient = new HttpClient();
+        HttpClient httpClient = new();
         ConfigureHttpClient(httpClient, apiKey);
 
         return new SerenityAIHubClient(httpClient);
@@ -59,17 +60,17 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateConversationRes> CreateConversation(string agentCode, int? version, CancellationToken cancellationToken = default)
+    public async Task<CreateConversationRes> CreateConversation(string agentCode, int? version = null, int apiVersion = 2, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
 
-        var queryString = version.HasValue ? $"?version={version}" : string.Empty;
+        string queryString = version.HasValue ? $"?version={version}" : string.Empty;
 
         // Create an empty content with the correct Content-Type header
-        var content = new StringContent("{}", System.Text.Encoding.UTF8, "application/json");
+        StringContent content = new("{}", System.Text.Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PostAsync($"/api/v2/agent/{agentCode}/conversation{queryString}", content, cancellationToken);
+        HttpResponseMessage response = await _httpClient.PostAsync($"/api/v{apiVersion}/agent/{agentCode}/conversation{queryString}", content, cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
@@ -78,24 +79,16 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     }
 
     /// <inheritdoc />
-    public async Task<AgentResult> SendMessage(string agentCode, Guid chatId, string message, CancellationToken cancellationToken = default)
+    public async Task<AgentResult> Execute(string agentCode, List<ExecuteParameter> input = null, int apiVersion = 2, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
-        if (chatId == Guid.Empty)
-            throw new ArgumentException("Chat ID cannot be empty", nameof(chatId));
-        if (string.IsNullOrEmpty(message))
-            throw new ArgumentNullException(nameof(message));
 
-        var parameters = new[]
-        {
-            new ExecuteParameter { Key = "chatId", Value = chatId.ToString() },
-            new ExecuteParameter { Key = "message", Value = message }
-        };
+        input ??= [];
 
-        var response = await _httpClient.PostAsJsonAsync(
-            $"/api/v2/agent/{agentCode}/execute",
-            parameters,
+        HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
+            $"/api/v{apiVersion}/agent/{agentCode}/execute",
+            input,
             JsonOptions,
             cancellationToken);
 

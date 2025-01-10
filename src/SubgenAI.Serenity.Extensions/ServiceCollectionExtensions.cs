@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
-using Serenity.AIHub.Client;
-using Serenity.AIHub.Constants;
-using Serenity.AIHub.Models;
+using SubgenAI.Serenity.Client;
+using SubgenAI.Serenity.Constants;
+using SubgenAI.Serenity.Models;
 
-namespace Serenity.AIHub.Extensions;
+namespace SubgenAI.Serenity.Extensions;
 
 /// <summary>
 /// Provides extension methods for the IServiceCollection interface.

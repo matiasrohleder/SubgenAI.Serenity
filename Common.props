@@ -6,10 +6,10 @@
     <Authors>Matías Rohleder</Authors>
     <Company>Subgen AI</Company>
     <Copyright>Copyright © 2025</Copyright>
-    <PackageProjectUrl>https://github.com/matiasrohleder/Serenity.AIHub</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/matiasrohleder/Serenity.AIHub</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/matiasrohleder/SubgenAI.Serenity</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/matiasrohleder/SubgenAI.Serenity</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Serenity.AIHub.Models.Execute;
+namespace SubgenAI.Serenity.Models.Execute;
 
 /// <summary>
 /// Represents the response from sending a message to an agent.
