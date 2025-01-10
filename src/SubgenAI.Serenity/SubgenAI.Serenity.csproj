@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>SubgenAI.Serenity</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Matías Rohleder</Authors>
     <Company>Subgen AI</Company>
     <Description>Official .NET SDK for Serenity AI Hub API</Description>
@@ -24,4 +24,12 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>
+        Changes in 1.1.0:
+        - Added input parameters to Execute method
+    </PackageReleaseNotes>
+  </PropertyGroup>
 </Project>

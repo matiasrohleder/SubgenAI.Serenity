@@ -28,8 +28,18 @@ public class YourService
 
     public async Task DoSomething()
     {
-        var conversation = await _client.CreateConversation("assistantagent", null);
-        var response = await _client.SendMessage("assistantagent", conversation.ChatId, "Hello!");
+        var conversation = await _client.CreateConversation("assistantagent");
+
+        List<ExecuteParameter> input = [];
+        input.Add(new(
+                "chatId",
+                conversation.ChatId
+            ));
+        input.Add(new(
+            "message",
+            "Hello, how are you?"
+        ));
+        var response = await _client.Execute("assistantagent", input);
     }
 }
 ```
