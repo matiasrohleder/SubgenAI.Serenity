@@ -60,17 +60,17 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateConversationRes> CreateConversation(string agentCode, int? version = null, int apiVersion = 2, CancellationToken cancellationToken = default)
+    public async Task<CreateConversationRes> CreateConversation(string agentCode, int? agentVersion = null, int apiVersion = 2, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
 
-        string queryString = version.HasValue ? $"?version={version}" : string.Empty;
+        string version = agentVersion.HasValue ? $"/{agentVersion}" : string.Empty;
 
         // Create an empty content with the correct Content-Type header
         StringContent content = new("{}", System.Text.Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await _httpClient.PostAsync($"/api/v{apiVersion}/agent/{agentCode}/conversation{queryString}", content, cancellationToken);
+        HttpResponseMessage response = await _httpClient.PostAsync($"/api/v{apiVersion}/agent/{agentCode}/conversation{version}", content, cancellationToken);
 
         response.EnsureSuccessStatusCode();
 
@@ -79,15 +79,17 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     }
 
     /// <inheritdoc />
-    public async Task<AgentResult> Execute(string agentCode, List<ExecuteParameter> input = null, int apiVersion = 2, CancellationToken cancellationToken = default)
+    public async Task<AgentResult> Execute(string agentCode, List<ExecuteParameter> input = null, int? agentVersion = null, int apiVersion = 2, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
 
         input ??= [];
 
+        string version = agentVersion.HasValue ? $"/{agentVersion}" : string.Empty;
+
         HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
-            $"/api/v{apiVersion}/agent/{agentCode}/execute",
+            $"/api/v{apiVersion}/agent/{agentCode}/execute{version}",
             input,
             JsonOptions,
             cancellationToken);
