@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>SubgenAI.Serenity</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>Matías Rohleder</Authors>
     <Company>Subgen AI</Company>
     <Description>Official .NET SDK for Serenity AI Hub API</Description>
@@ -30,6 +30,14 @@
     <PackageReleaseNotes>
         Changes in 1.1.0:
         - Added input parameters to Execute method
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.1.1</Version>
+    <PackageReleaseNotes>
+        Changes in 1.1.1:
+        - Added agent version support on Execute
     </PackageReleaseNotes>
   </PropertyGroup>
 </Project>

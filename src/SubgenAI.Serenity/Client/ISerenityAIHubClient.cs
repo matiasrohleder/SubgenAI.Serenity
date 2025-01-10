@@ -16,7 +16,7 @@ public interface ISerenityAIHubClient
     /// <param name="apiVersion">The API version to use (default is 2).</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the created conversation response.</returns>
-    Task<CreateConversationRes> CreateConversation(string agentCode, int? version = null, int apiVersion = 2, CancellationToken cancellationToken = default);
+    Task<CreateConversationRes> CreateConversation(string agentCode, int? agentVersion = null, int apiVersion = 2, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Executes an agent.
@@ -26,5 +26,5 @@ public interface ISerenityAIHubClient
     /// <param name="apiVersion">The API version to use (default is 2).</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The response from the agent.</returns>
-    Task<AgentResult> Execute(string agentCode, List<ExecuteParameter> input = null, int apiVersion = 2, CancellationToken cancellationToken = default);
+    Task<AgentResult> Execute(string agentCode, List<ExecuteParameter> input = null, int? agentVersion = null, int apiVersion = 2, CancellationToken cancellationToken = default);
 }
