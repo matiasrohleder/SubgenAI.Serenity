@@ -10,7 +10,6 @@ namespace SubgenAI.Serenity.Models.Execute;
 /// <param name="value">The value of the parameter.</param>
 public class ExecuteParameter(string key, object value)
 {
-
     /// <summary>
     /// Gets or sets the key.
     /// </summary>
