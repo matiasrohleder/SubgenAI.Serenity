@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/matiasrohleder/SubgenAI.Serenity</PackageProjectUrl>
     <RepositoryUrl>https://github.com/matiasrohleder/SubgenAI.Serenity</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
