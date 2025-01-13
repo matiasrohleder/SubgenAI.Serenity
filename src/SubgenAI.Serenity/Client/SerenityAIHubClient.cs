@@ -60,17 +60,31 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     }
 
     /// <inheritdoc />
-    public async Task<CreateConversationRes> CreateConversation(string agentCode, int? agentVersion = null, int apiVersion = 2, CancellationToken cancellationToken = default)
+    public async Task<CreateConversationRes> CreateConversation(
+    string agentCode,
+    List<ExecuteParameter> inputParameters = null,
+    int? agentVersion = null,
+    int apiVersion = 2,
+    CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrEmpty(agentCode))
             throw new ArgumentNullException(nameof(agentCode));
 
+        inputParameters ??= [];
+
         string version = agentVersion.HasValue ? $"/{agentVersion}" : string.Empty;
 
-        // Create an empty content with the correct Content-Type header
-        StringContent content = new("{}", System.Text.Encoding.UTF8, "application/json");
+        // Create the content with input parameters
+        var requestBody = new
+        {
+            inputParameters
+        };
 
-        HttpResponseMessage response = await _httpClient.PostAsync($"/api/v{apiVersion}/agent/{agentCode}/conversation{version}", content, cancellationToken);
+        HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
+            $"/api/v{apiVersion}/agent/{agentCode}/conversation{version}",
+            requestBody,
+            JsonOptions,
+            cancellationToken);
 
         response.EnsureSuccessStatusCode();
 

@@ -11,6 +11,26 @@ public class ConversationIntegrationTests(TestFixture fixture) : IClassFixture<T
     private readonly ISerenityAIHubClient _client = fixture.ServiceProvider.GetRequiredService<ISerenityAIHubClient>();
 
     [Fact]
+    public async Task CreateConversation_WithInputParameters_ShouldSucceed()
+    {
+        // Arrange - Define input parameters
+        List<ExecuteParameter> inputParameters =
+        [
+            new ExecuteParameter("name", "Matthew")
+        ];
+
+        // Act - Create a conversation with input parameters
+        CreateConversationRes result = await _client.CreateConversation("assistantagent", inputParameters);
+
+        // Assert - Verify the conversation was created successfully
+        Assert.NotEqual(Guid.Empty, result.ChatId);
+        Assert.NotNull(result.Content);
+
+        // Optionally, verify that the input parameters were processed correctly
+        Assert.Contains("Matthew", result.Content);
+    }
+
+    [Fact]
     public async Task CreateConversation_WithoutVersion_ShouldSucceed()
     {
         // Act
@@ -26,7 +46,7 @@ public class ConversationIntegrationTests(TestFixture fixture) : IClassFixture<T
     public async Task CreateConversation_WithVersion_ShouldSucceed()
     {
         // Act
-        CreateConversationRes result = await _client.CreateConversation("assistantagent", 1);
+        CreateConversationRes result = await _client.CreateConversation("assistantagent", null, 1);
 
         // Assert
         Assert.NotEqual(Guid.Empty, result.ChatId);
@@ -60,6 +80,10 @@ public class ConversationIntegrationTests(TestFixture fixture) : IClassFixture<T
         input.Add(new(
             "message",
             "Hello, how are you?"
+        ));
+        input.Add(new(
+            "language",
+            "german"
         ));
         AgentResult agentResult = await _client.Execute(
             "assistantagent",
