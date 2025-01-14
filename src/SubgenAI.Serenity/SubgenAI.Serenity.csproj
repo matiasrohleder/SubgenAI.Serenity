@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>SubgenAI.Serenity</PackageId>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Authors>Matías Rohleder</Authors>
     <Company>Subgen AI</Company>
     <Description>Official .NET SDK for Serenity AI Hub API</Description>
@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <PackageReleaseNotes>
-        Changes in 1.1.2:
-        - Added input parameters to Create Conversation method
+        Changes in 1.1.3:
+        - Added HttpRequestException to the CreateConversation and Execute methods.
     </PackageReleaseNotes>
   </PropertyGroup>
 </Project>

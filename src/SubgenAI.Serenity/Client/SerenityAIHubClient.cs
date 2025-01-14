@@ -86,7 +86,11 @@ public class SerenityAIHubClient : ISerenityAIHubClient
             JsonOptions,
             cancellationToken);
 
-        response.EnsureSuccessStatusCode();
+        if (!response.IsSuccessStatusCode)
+        {
+            string errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new HttpRequestException($"Request failed with status code {response.StatusCode}: {errorContent}");
+        }
 
         return await response.Content.ReadFromJsonAsync<CreateConversationRes>(JsonOptions, cancellationToken)
                ?? throw new InvalidOperationException("Failed to deserialize response");
@@ -108,7 +112,11 @@ public class SerenityAIHubClient : ISerenityAIHubClient
             JsonOptions,
             cancellationToken);
 
-        response.EnsureSuccessStatusCode();
+        if (!response.IsSuccessStatusCode)
+        {
+            string errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new HttpRequestException($"Request failed with status code {response.StatusCode}: {errorContent}");
+        }
 
         return await response.Content.ReadFromJsonAsync<AgentResult>(JsonOptions, cancellationToken)
                ?? throw new InvalidOperationException("Failed to deserialize response");

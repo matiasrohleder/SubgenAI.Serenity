@@ -15,7 +15,7 @@ public class ActivityIntegrationTests(TestFixture fixture) : IClassFixture<TestF
         // Arrange
         List<ExecuteParameter> input =
         [
-            new ExecuteParameter("word", "running")
+            new("word", "running")
         ];
 
         // Act
@@ -31,16 +31,20 @@ public class ActivityIntegrationTests(TestFixture fixture) : IClassFixture<TestF
     [Fact]
     public async Task Execute_WithoutWord_ShouldFail()
     {
-        // Act & Assert
-        await Assert.ThrowsAsync<HttpRequestException>(() =>
+        // Act
+        HttpRequestException exception = await Assert.ThrowsAsync<HttpRequestException>(() =>
             _client.Execute("activityagent"));
+
+        // Assert
+        Assert.NotNull(exception);
+        Assert.Contains("Request failed with status code", exception.Message);
     }
 
     [Fact]
     public async Task Execute_WithDifferentWords_ShouldReturnDifferentResponses()
     {
         // Arrange
-        string[] words = ["swimming", "cycling", "hiking"];
+        string[] words = { "swimming", "cycling", "hiking" };
         var responses = new List<string>();
 
         // Act
@@ -48,7 +52,7 @@ public class ActivityIntegrationTests(TestFixture fixture) : IClassFixture<TestF
         {
             List<ExecuteParameter> input =
             [
-                new ExecuteParameter("word", word)
+                new("word", word)
             ];
 
             AgentResult result = await _client.Execute("activityagent", input);
@@ -73,7 +77,7 @@ public class ActivityIntegrationTests(TestFixture fixture) : IClassFixture<TestF
         // Arrange
         List<ExecuteParameter> input =
         [
-            new ExecuteParameter("word", "dancing")
+            new("word", "dancing")
         ];
 
         // Act
@@ -92,7 +96,7 @@ public class ActivityIntegrationTests(TestFixture fixture) : IClassFixture<TestF
         // Arrange
         List<ExecuteParameter> input =
         [
-            new ExecuteParameter("word", "yoga")
+            new("word", "yoga")
         ];
 
         // Act
