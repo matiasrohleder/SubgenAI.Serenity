@@ -36,13 +36,15 @@ public class SerenityAIHubClient : ISerenityAIHubClient
     /// Initializes a new instance of the <see cref="SerenityAIHubClient"/> class for direct instantiation.
     /// </summary>
     /// <param name="apiKey">The API key to use for authentication.</param>
-    public static SerenityAIHubClient Create(string apiKey)
+    /// <param name="baseUrl">The base URL to use for the API.</param>
+    /// <param name="timeout">The timeout in seconds.</param>
+    public static SerenityAIHubClient Create(string apiKey, string baseUrl = null, int? timeout = null)
     {
         if (string.IsNullOrEmpty(apiKey))
             throw new ArgumentNullException(nameof(apiKey));
 
         HttpClient httpClient = new();
-        ConfigureHttpClient(httpClient, apiKey);
+        ConfigureHttpClient(httpClient, apiKey, baseUrl, timeout);
 
         return new SerenityAIHubClient(httpClient);
     }
@@ -53,10 +55,12 @@ public class SerenityAIHubClient : ISerenityAIHubClient
         _httpClient = httpClient;
     }
 
-    private static void ConfigureHttpClient(HttpClient client, string apiKey)
+    private static void ConfigureHttpClient(HttpClient client, string apiKey, string baseUrl = null, int? timeout = null)
     {
         client.DefaultRequestHeaders.Add("X-API-KEY", apiKey);
-        client.BaseAddress = new Uri(ClientConstants.BaseUrl);
+        baseUrl ??= ClientConstants.BaseUrl;
+        client.BaseAddress = new Uri(baseUrl);
+        client.Timeout = TimeSpan.FromSeconds(timeout ?? 100);
     }
 
     /// <inheritdoc />

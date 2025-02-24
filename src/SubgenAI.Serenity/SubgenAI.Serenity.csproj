@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>1.1.3</Version>
+    <Version>1.1.5</Version>
     <PackageReleaseNotes>
-        Changes in 1.1.3:
-        - Added HttpRequestException to the CreateConversation and Execute methods.
+        Changes in 1.1.5:
+        - Added timeout configuration for client
     </PackageReleaseNotes>
   </PropertyGroup>
 </Project>
