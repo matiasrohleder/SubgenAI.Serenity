@@ -9,6 +9,13 @@ dotnet add package SubgenAI.Serenity
 ```
 
 ## Usage
+### Direct Instantiation
+
+```csharp
+var client = SerenityAIHubClient.Create("your-api-key");
+var conversation = await client.CreateConversation("assistantagent", null);
+var response = await client.SendMessage("assistantagent", conversation.ChatId, "Hello!");
+```
 
 ### Using Dependency Injection
 
@@ -42,12 +49,4 @@ public class YourService
         var response = await _client.Execute("assistantagent", input);
     }
 }
-```
-
-### Direct Instantiation
-
-```csharp
-var client = SerenityAIHubClient.Create("your-api-key");
-var conversation = await client.CreateConversation("assistantagent", null);
-var response = await client.SendMessage("assistantagent", conversation.ChatId, "Hello!");
 ```
