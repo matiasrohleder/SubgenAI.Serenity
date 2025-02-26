@@ -12,6 +12,8 @@ dotnet add package SubgenAI.Serenity
 ### Direct Instantiation
 
 ```csharp
+using SubgenAI.Serenity.Client;
+
 var client = SerenityAIHubClient.Create("your-api-key");
 var conversation = await client.CreateConversation("assistantagent", null);
 var response = await client.SendMessage("assistantagent", conversation.ChatId, "Hello!");
@@ -21,8 +23,11 @@ var response = await client.SendMessage("assistantagent", conversation.ChatId, "
 
 ```csharp
 // In your startup/program.cs
+using SubgenAI.Serenity.Extensions;
 services.AddSerenityAIHub("your-api-key");
+```
 
+```csharp
 // In your service/controller
 public class YourService
 {
